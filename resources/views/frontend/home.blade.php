@@ -13,60 +13,81 @@
 
 {{-- SECTION CONTENU PRINCIPAL --}}
 @section('content')
-    {{-- Section "Nos Produits" fixes --}}
+    {{-- Section "Nos Produits Phares" avec vraies données --}}
     <section class="products-section py-5">
         <div class="container">
-            <h2 class="text-center mb-4">NOS PRODUITS</h2>
-
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <a href="#" class="product-card d-block">
-                        <img src="{{ asset('assets/images/produit1.jpg') }}" alt="Produit 1"
-                            class="img-fluid rounded shadow-sm">
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#" class="product-card d-block">
-                        <img src="{{ asset('assets/images/produit2.jpg') }}" alt="Produit 2"
-                            class="img-fluid rounded shadow-sm">
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#" class="product-card d-block">
-                        <img src="{{ asset('assets/images/produit3.jpg') }}" alt="Produit 3"
-                            class="img-fluid rounded shadow-sm">
-                    </a>
-                </div>
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">NOS PRODUITS PHARES</h2>
+                <p class="lead text-muted">Découvrez notre sélection de produits en fibrociment ECOMAT</p>
             </div>
-        </div>
-        <div class="container">
 
             <div class="row">
-                @foreach ($products as $product)
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                @php
+                    $featuredProducts = $products->take(3);
+                @endphp
+
+                @foreach ($featuredProducts as $product)
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 shadow-lg border-0 product-card-hover">
                             @if ($product->images->count())
-                                <img src="{{ Storage::url($product->images->first()->image_path) }}"
-                                    alt="{{ $product->name }}" class="card-img-top">
+                                <div class="card-img-wrapper position-relative">
+                                    <img src="{{ Storage::url($product->images->first()->image_path) }}"
+                                        alt="{{ $product->name }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <span class="badge bg-primary">{{ $product->category->name }}</span>
+                                    </div>
+                                </div>
                             @else
-                                <img src="{{ asset('assets/images/placeholder.jpg') }}" alt="Image indisponible"
-                                    class="card-img-top">
+                                <div class="card-img-wrapper position-relative">
+                                    <div class="d-flex align-items-center justify-content-center bg-light" style="height: 250px;">
+                                        <div class="text-center">
+                                            <i class="fas fa-image fa-3x text-muted mb-2"></i>
+                                            <p class="text-muted mb-0 small">{{ $product->name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <span class="badge bg-primary">{{ $product->category->name }}</span>
+                                    </div>
+                                </div>
                             @endif
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ $product->name }}</h5>
-                                <p class="card-text">{{ Str::limit($product->description, 80) }}</p>
-                                <a href="{{ route('products.show', $product->slug) }}" class="btn btn-primary btn-sm">Voir
-                                    plus</a>
+
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fw-bold">{{ $product->name }}</h5>
+                                <p class="card-text text-muted flex-grow-1">
+                                    {{ Str::limit($product->description, 100) }}
+                                </p>
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="h5 text-primary mb-0 fw-bold">
+                                            {{ number_format($product->price, 0, ',', ' ') }} FCFA
+                                        </span>
+                                        <small class="text-muted">l'unité</small>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <a href="{{ route('products.show', $product->slug) }}"
+                                           class="btn btn-primary">
+                                            <i class="fas fa-eye me-2"></i>Voir détails
+                                        </a>
+                                        <a href="{{ route('contact.devis') }}"
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-calculator me-2"></i>Demander un devis
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <div class="text-center mt-4">
-                <a href="{{ route('products.index') }}" class="btn btn-custom-outline">Voir tous nos produits</a>
+            <div class="text-center mt-5">
+                <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-th-large me-2"></i>
+                    Voir tous nos produits
+                </a>
             </div>
         </div>
+
     </section>
 
     {{-- Section "Produits dynamiques" --}}
@@ -92,7 +113,7 @@
                                 fournissons des solutions fiables pour la construction et la quincaillerie de
                                 fixation...
                             </p>
-                            <a href="{{ url('/a-propos') }}" class="btn btn-primary">En savoir plus</a>
+                            <a href="{{ route('pages.show', 'qui-sommes-nous') }}" class="btn btn-primary">En savoir plus</a>
                         </div>
                     </div>
                 </div>
@@ -114,30 +135,50 @@
                                 répondra rapidement.
                             </p>
 
-                            <form action="" method="POST">
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('contact.store') }}" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="name" class="form-label">Votre nom</label>
-                                        <input type="text" class="form-control form-control-lg" id="name"
-                                            name="name" required>
+                                        <input type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="name"
+                                            name="name" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Votre email</label>
-                                        <input type="email" class="form-control form-control-lg" id="email"
-                                            name="email" required>
+                                        <input type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="email"
+                                            name="email" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="mt-3">
                                     <label for="subject" class="form-label">Sujet</label>
-                                    <input type="text" class="form-control form-control-lg" id="subject" name="subject"
-                                        required>
+                                    <input type="text" class="form-control form-control-lg @error('subject') is-invalid @enderror" id="subject" name="subject"
+                                        value="{{ old('subject') }}" required>
+                                    @error('subject')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-3">
                                     <label for="message" class="form-label">Votre message</label>
-                                    <textarea class="form-control form-control-lg" id="message" name="message" rows="5" required></textarea>
+                                    <textarea class="form-control form-control-lg @error('message') is-invalid @enderror" id="message" name="message" rows="5" required>{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="text-center mt-4">

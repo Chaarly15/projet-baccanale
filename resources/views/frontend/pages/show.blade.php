@@ -1,11 +1,20 @@
-<!-- Vue fontend/pages/show -->
-@extends('layouts.frontend')
+@extends('layouts.app')
+
+@section('hero')
+    <header class="hero-section" style="background-image: url('{{ asset('assets/images/page-hero.jpg') }}');">
+        <div class="container text-center">
+            <div class="hero-text-box">
+                <h1 class="display-4 fw-bold">{{ strtoupper($page->title) }}</h1>
+                <p class="lead mt-3">{{ $page->meta_description ?? 'Découvrez plus d\'informations sur nos services' }}</p>
+            </div>
+        </div>
+    </header>
+@endsection
 
 @section('content')
-<div class="container">
-    <h2>{{ $page->title }}</h2>
-    <div class="mt-3">
-        {!! nl2br(e($page->body)) !!}
-    </div>
-</div>
+    <section class="py-5">
+        <div class="container">
+            {!! $page->body !!}
+        </div>
+    </section>
 @endsection

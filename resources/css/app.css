@@ -11,6 +11,19 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
+    /* Charte graphique Baccanale - Bleu, Blanc, Noir */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+    --color-primary-950: #172554;
+
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
     --color-zinc-200: #e5e5e5;
@@ -23,16 +36,16 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
+    --color-accent: var(--color-primary-600);
+    --color-accent-content: var(--color-primary-600);
     --color-accent-foreground: var(--color-white);
 }
 
 @layer theme {
     .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
+        --color-accent: var(--color-primary-400);
+        --color-accent-content: var(--color-primary-400);
+        --color-accent-foreground: var(--color-zinc-900);
     }
 }
 
@@ -58,13 +71,71 @@
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+    @apply outline-hidden ring-2 ring-primary-500 ring-offset-2 ring-offset-white;
 }
 
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+/* Styles personnalisés pour la charte graphique Baccanale */
+@layer components {
+    /* Couleurs principales */
+    .bg-primary { @apply bg-primary-600; }
+    .bg-primary-light { @apply bg-primary-100; }
+    .bg-primary-dark { @apply bg-primary-800; }
+    .text-primary { @apply text-primary-600; }
+    .text-primary-light { @apply text-primary-400; }
+    .text-primary-dark { @apply text-primary-800; }
 
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+    /* Boutons avec charte graphique */
+    .btn-baccanale {
+        @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-700 hover:shadow-lg;
+    }
+
+    .btn-baccanale-outline {
+        @apply border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white;
+    }
+
+    .btn-baccanale-light {
+        @apply bg-primary-100 text-primary-800 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-200;
+    }
+
+    /* Cards avec design moderne */
+    .card-baccanale {
+        @apply bg-white rounded-xl shadow-lg border border-zinc-200 transition-all duration-300 hover:shadow-xl hover:border-primary-200;
+    }
+
+    /* Navigation moderne */
+    .nav-baccanale {
+        @apply bg-white shadow-md border-b border-zinc-200;
+    }
+
+    .nav-link-baccanale {
+        @apply text-zinc-700 font-medium transition-colors duration-300 hover:text-primary-600;
+    }
+
+    /* Footer moderne */
+    .footer-baccanale {
+        @apply bg-zinc-900 text-zinc-300;
+    }
+
+    /* Sections avec gradients subtils */
+    .section-primary {
+        @apply bg-gradient-to-br from-primary-50 to-white;
+    }
+
+    .section-dark {
+        @apply bg-gradient-to-br from-zinc-900 to-zinc-800 text-white;
+    }
+
+    /* Animations et transitions */
+    .fade-in {
+        @apply opacity-0 translate-y-4 transition-all duration-700;
+    }
+
+    .fade-in.active {
+        @apply opacity-100 translate-y-0;
+    }
+
+    /* Responsive utilities */
+    .container-baccanale {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+}

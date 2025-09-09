@@ -12,7 +12,9 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -23,7 +25,16 @@ class AdminMiddleware
 
         // Vérifier si l'utilisateur a le rôle admin
         if (Auth::user()->role !== 'admin') {
-            abort(403, 'Accès refusé. Vous devez être administrateur.');
+            // Si c'est une requête AJAX/API, retourner 403 JSON
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Accès refusé. Vous devez être administrateur.'
+                ], 403);
+            }
+
+            // Sinon, rediriger vers l'accueil avec un message d'erreur
+            return redirect('/')
+                ->with('error', 'Accès refusé. Vous devez être administrateur.');
         }
 
         return $next($request);

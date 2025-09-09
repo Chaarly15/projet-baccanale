@@ -4,15 +4,18 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController as FrontendPageController;
 use App\Http\Controllers\Frontend\FaqController as FrontFaqController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
+use App\Http\Controllers\Frontend\DocumentationController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 // Frontend
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -31,15 +34,33 @@ Route::post('/devis', [FrontendContactController::class, 'storeDevis'])->name('c
 // FAQ
 Route::get('/faq', [FrontFaqController::class, 'index'])->name('faq.index');
 
+// Documentation
+Route::get('/documentation', [DocumentationController::class, 'index'])->name('documentation.index');
+Route::get('/documentation/{slug}', [DocumentationController::class, 'show'])->name('documentation.show');
+Route::get('/documentation/{slug}/download', [DocumentationController::class, 'download'])->name('documentation.download');
+Route::get('/documentation/type/{type}', [DocumentationController::class, 'byType'])->name('documentation.by-type');
+
+// Pages spécifiques
+Route::get('/qui-sommes-nous', function () {
+    return view('frontend.pages.qui-sommes-nous');
+})->name('pages.qui-sommes-nous');
+
+Route::get('/fibrociment', function () {
+    return view('frontend.pages.fibrociment');
+})->name('pages.fibrociment');
+
 // Pages statiques (doit être en dernier pour éviter les conflits)
 Route::get('/{slug}', [FrontendPageController::class, 'show'])->name('pages.show');
 
 // Admin
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('pages', AdminPageController::class);
     Route::resource('faqs', AdminFaqController::class);
+    Route::resource('documents', AdminDocumentController::class);
+    Route::get('contacts', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
 });
 
 Route::view('dashboard', 'dashboard')

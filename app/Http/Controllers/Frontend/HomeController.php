@@ -7,14 +7,14 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends Controller 
 {
      public function index()
     {
         // Derniers 6 produits ajoutés
         $products = Product::with('images')->latest()->take(6)->get();
 
-        // Liste des catégories
+        // Liste des catégories pour affichage dans la section "NOS PRODUITS"
         $categories = Category::all();
 
         return view('frontend.home', compact('products', 'categories'));

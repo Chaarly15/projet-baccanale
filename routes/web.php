@@ -36,6 +36,8 @@ Route::get('/{slug}', [FrontendPageController::class, 'show'])->name('pages.show
 
 // Admin
 Route::prefix('admin')->name('admin.')->group(function () {
+    //Route::get('login', Login::class)->name('login');
+    //Route::get('register', Register::class)->name('register');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('pages', AdminPageController::class);

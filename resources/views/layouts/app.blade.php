@@ -43,35 +43,43 @@
         }
 
         .navbar {
-            background-color: var(--white-color) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid var(--gray-200);
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
+        .navbar .navbar-brand {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
         .navbar .navbar-brand img {
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.1));
         }
 
         .navbar .navbar-brand:hover img {
             transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.2));
         }
 
         .navbar .navbar-nav .nav-link {
             color: var(--gray-700) !important;
             font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.025em;
-            padding: 0.75rem 1.25rem !important;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            padding: 0.875rem 1.5rem !important;
             border-radius: 8px;
             transition: all 0.3s ease;
+            text-transform: uppercase;
             position: relative;
         }
 
         .navbar .navbar-nav .nav-link:hover {
-            color: var(--primary-600) !important;
-            background-color: var(--primary-50);
+            color: #3b82f6 !important;
+            background: rgba(59, 130, 246, 0.1);
             transform: translateY(-1px);
         }
 
@@ -82,7 +90,7 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+            background: #3b82f6;
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
@@ -148,6 +156,106 @@
                 visibility: visible;
                 transform: translateY(0);
             }
+        }
+
+        /* Styles modernes pour tous les menus de navigation */
+        .dropdown-menu-modern, .dropdown-menu-documentation {
+            min-width: 320px;
+            padding: 1rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown-menu-modern .dropdown-header, .dropdown-menu-documentation .dropdown-header {
+            padding: 0.75rem 1.5rem 0.5rem;
+            font-size: 0.85rem;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(29, 78, 216, 0.05));
+        }
+
+        .dropdown-menu-modern .modern-item, .dropdown-menu-documentation .documentation-item {
+            padding: 0;
+            margin: 0.25rem 0.75rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .dropdown-menu-modern .modern-item:hover, .dropdown-menu-documentation .documentation-item:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(29, 78, 216, 0.08));
+            border-color: rgba(59, 130, 246, 0.2);
+            transform: translateX(4px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .dropdown-item-content {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .dropdown-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+        }
+
+        /* Icônes spécifiques par type */
+        .dropdown-icon.products-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .dropdown-icon.category-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+        .dropdown-icon.company-icon { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        .dropdown-icon.material-icon { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+        .dropdown-icon.faq-icon { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+        .dropdown-icon.brochure-icon { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        .dropdown-icon.fiche-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .dropdown-icon.catalogue-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+        .dropdown-icon.guide-icon { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+        .dropdown-icon.contact-icon { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); }
+        .dropdown-icon.devis-icon { background: linear-gradient(135deg, #84cc16, #65a30d); box-shadow: 0 4px 12px rgba(132, 204, 22, 0.3); }
+
+        .modern-item:hover .dropdown-icon, .documentation-item:hover .dropdown-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .dropdown-text {
+            flex: 1;
+        }
+
+        .dropdown-title {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .dropdown-subtitle {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.3;
+        }
+
+        .modern-item:hover .dropdown-title, .documentation-item:hover .dropdown-title {
+            color: #3b82f6;
+        }
+
+        .modern-item:hover .dropdown-subtitle, .documentation-item:hover .dropdown-subtitle {
+            color: #4b5563;
         }
 
         /* --- Section Héro --- */
@@ -723,17 +831,46 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             NOS PRODUITS
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProduits">
-                            <li><a class="dropdown-item" href="{{ route('products.index') }}">
-                                <i class="fas fa-th-large me-2"></i>Tous nos produits
+                        <ul class="dropdown-menu dropdown-menu-modern" aria-labelledby="navbarDropdownProduits">
+                            <li class="dropdown-header">
+                                <i class="fas fa-shopping-bag me-2 text-primary"></i>
+                                <strong>Notre catalogue</strong>
+                            </li>
+                            <li><a class="dropdown-item modern-item" href="{{ route('products.index') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon products-icon">
+                                        <i class="fas fa-th-large"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Tous nos produits</div>
+                                        <div class="dropdown-subtitle">Découvrez notre gamme complète</div>
+                                    </div>
+                                </div>
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">
+                                <i class="fas fa-tags me-2 text-primary"></i>
+                                <strong>Par catégorie</strong>
+                            </li>
                             @php
                                 $categories = App\Models\Category::all();
+                                $categoryIcons = [
+                                    'plaques-ondulees' => 'fas fa-grip-lines',
+                                    'accessoires-finition' => 'fas fa-paint-brush',
+                                    'accessoires-fixation' => 'fas fa-tools',
+                                ];
                             @endphp
                             @foreach($categories as $category)
-                                <li><a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">
-                                    <i class="fas fa-layer-group me-2"></i>{{ $category->name }}
+                                <li><a class="dropdown-item modern-item" href="{{ route('categories.show', $category->slug) }}">
+                                    <div class="dropdown-item-content">
+                                        <div class="dropdown-icon category-icon">
+                                            <i class="{{ $categoryIcons[$category->slug] ?? 'fas fa-layer-group' }}"></i>
+                                        </div>
+                                        <div class="dropdown-text">
+                                            <div class="dropdown-title">{{ $category->name }}</div>
+                                            <div class="dropdown-subtitle">{{ $category->products_count ?? 0 }} produits disponibles</div>
+                                        </div>
+                                    </div>
                                 </a></li>
                             @endforeach
                         </ul>
@@ -743,15 +880,43 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             A PROPOS
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownAPropos">
-                            <li><a class="dropdown-item" href="{{ route('pages.show', 'qui-sommes-nous') }}">
-                                <i class="fas fa-users me-2"></i>Qui sommes-nous ?
+                        <ul class="dropdown-menu dropdown-menu-modern" aria-labelledby="navbarDropdownAPropos">
+                            <li class="dropdown-header">
+                                <i class="fas fa-building me-2 text-primary"></i>
+                                <strong>Notre entreprise</strong>
+                            </li>
+                            <li><a class="dropdown-item modern-item" href="/qui-sommes-nous">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon company-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Qui sommes-nous ?</div>
+                                        <div class="dropdown-subtitle">Notre histoire et nos valeurs</div>
+                                    </div>
+                                </div>
                             </a></li>
-                            <li><a class="dropdown-item" href="{{ route('pages.show', 'fibrociment') }}">
-                                <i class="fas fa-info-circle me-2"></i>Le fibrociment
+                            <li><a class="dropdown-item modern-item" href="/fibrociment">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon material-icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Le fibrociment</div>
+                                        <div class="dropdown-subtitle">Tout savoir sur nos matériaux</div>
+                                    </div>
+                                </div>
                             </a></li>
-                            <li><a class="dropdown-item" href="{{ route('faq.index') }}">
-                                <i class="fas fa-question-circle me-2"></i>FAQ
+                            <li><a class="dropdown-item modern-item" href="{{ route('faq.index') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon faq-icon">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">FAQ</div>
+                                        <div class="dropdown-subtitle">Questions fréquemment posées</div>
+                                    </div>
+                                </div>
                             </a></li>
                         </ul>
                     </li>
@@ -760,15 +925,70 @@
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             DOCUMENTATION
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocumentation">
-                            <li><a class="dropdown-item" href="{{ route('pages.show', 'brochure') }}">
-                                <i class="fas fa-book me-2"></i>Notre brochure
+                        <ul class="dropdown-menu dropdown-menu-documentation" aria-labelledby="navbarDropdownDocumentation">
+                            <li class="dropdown-header">
+                                <i class="fas fa-file-download me-2 text-primary"></i>
+                                <strong>Téléchargements</strong>
+                            </li>
+                            <li><a class="dropdown-item documentation-item" href="{{ route('documentation.index') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon">
+                                        <i class="fas fa-folder-open"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Tous les documents</div>
+                                        <div class="dropdown-subtitle">Accès complet à notre documentation</div>
+                                    </div>
+                                </div>
                             </a></li>
-                            <li><a class="dropdown-item" href="{{ route('pages.show', 'fiche-technique-plaques') }}">
-                                <i class="fas fa-file-alt me-2"></i>Fiche technique plaques
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">
+                                <i class="fas fa-layer-group me-2 text-primary"></i>
+                                <strong>Par catégorie</strong>
+                            </li>
+                            <li><a class="dropdown-item documentation-item" href="{{ route('documentation.by-type', 'brochure') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon brochure-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Brochures</div>
+                                        <div class="dropdown-subtitle">Présentation de nos produits</div>
+                                    </div>
+                                </div>
                             </a></li>
-                            <li><a class="dropdown-item" href="{{ route('pages.show', 'fiche-technique-accessoires') }}">
-                                <i class="fas fa-file-alt me-2"></i>Fiche technique accessoires
+                            <li><a class="dropdown-item documentation-item" href="{{ route('documentation.by-type', 'fiche_technique') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon fiche-icon">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Fiches techniques</div>
+                                        <div class="dropdown-subtitle">Spécifications détaillées</div>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <li><a class="dropdown-item documentation-item" href="{{ route('documentation.by-type', 'catalogue') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon catalogue-icon">
+                                        <i class="fas fa-th-large"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Catalogues</div>
+                                        <div class="dropdown-subtitle">Gamme complète de produits</div>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <li><a class="dropdown-item documentation-item" href="{{ route('documentation.by-type', 'guide') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon guide-icon">
+                                        <i class="fas fa-map"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Guides d'installation</div>
+                                        <div class="dropdown-subtitle">Instructions pas à pas</div>
+                                    </div>
+                                </div>
                             </a></li>
                         </ul>
                     </li>
@@ -777,12 +997,32 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             CONTACT
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownContact">
-                            <li><a class="dropdown-item" href="{{ route('contact.index') }}">
-                                <i class="fas fa-envelope me-2"></i>Nous contacter
+                        <ul class="dropdown-menu dropdown-menu-modern" aria-labelledby="navbarDropdownContact">
+                            <li class="dropdown-header">
+                                <i class="fas fa-handshake me-2 text-primary"></i>
+                                <strong>Nous contacter</strong>
+                            </li>
+                            <li><a class="dropdown-item modern-item" href="{{ route('contact.index') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Nous contacter</div>
+                                        <div class="dropdown-subtitle">Posez-nous vos questions</div>
+                                    </div>
+                                </div>
                             </a></li>
-                            <li><a class="dropdown-item" href="{{ route('contact.devis') }}">
-                                <i class="fas fa-calculator me-2"></i>Demander un devis
+                            <li><a class="dropdown-item modern-item" href="{{ route('contact.devis') }}">
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-icon devis-icon">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <div class="dropdown-text">
+                                        <div class="dropdown-title">Demander un devis</div>
+                                        <div class="dropdown-subtitle">Estimation gratuite et rapide</div>
+                                    </div>
+                                </div>
                             </a></li>
                         </ul>
                     </li>
@@ -855,7 +1095,7 @@
                         <li><a href="{{ route('faq.index') }}">
                             <i class="fas fa-chevron-right"></i>FAQ
                         </a></li>
-                        <li><a href="{{ route('pages.show', 'brochure') }}">
+                        <li><a href="{{ route('documentation.index') }}">
                             <i class="fas fa-chevron-right"></i>Documentation
                         </a></li>
                     </ul>

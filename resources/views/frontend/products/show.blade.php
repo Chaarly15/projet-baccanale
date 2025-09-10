@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('hero')
-    <header class="hero-section" style="background-image: url('{{ asset('assets/images/product-hero.jpg') }}');">
+    <header class="hero-section" style="background-image: url('{{ asset('assets/images/hero-background.jpg') }}');">
         <div class="container text-center">
             <div class="hero-text-box">
                 <nav aria-label="breadcrumb" class="mb-3">

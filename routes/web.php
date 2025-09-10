@@ -4,17 +4,26 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController as FrontendPageController;
 use App\Http\Controllers\Frontend\FaqController as FrontFaqController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
+use App\Http\Controllers\Frontend\DocumentationController;
+
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+// ------------------------
 // Frontend
+// ------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Produits
@@ -31,13 +40,23 @@ Route::post('/devis', [FrontendContactController::class, 'storeDevis'])->name('c
 // FAQ
 Route::get('/faq', [FrontFaqController::class, 'index'])->name('faq.index');
 
-// Pages statiques (doit être en dernier pour éviter les conflits)
+// Documentation
+Route::get('/documentation', [DocumentationController::class, 'index'])->name('documentation.index');
+Route::get('/documentation/{slug}', [DocumentationController::class, 'show'])->name('documentation.show');
+Route::get('/documentation/{slug}/download', [DocumentationController::class, 'download'])->name('documentation.download');
+Route::get('/documentation/type/{type}', [DocumentationController::class, 'byType'])->name('documentation.by-type');
+
+// Pages statiques
+Route::get('/qui-sommes-nous', fn() => view('frontend.pages.qui-sommes-nous'))->name('pages.qui-sommes-nous');
+Route::get('/fibrociment', fn() => view('frontend.pages.fibrociment'))->name('pages.fibrociment');
+
+// Page dynamique (toujours en dernier)
 Route::get('/{slug}', [FrontendPageController::class, 'show'])->name('pages.show');
 
+
+// ------------------------
 // Admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    //Route::get('login', Login::class)->name('login');
-    //Route::get('register', Register::class)->name('register');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('pages', AdminPageController::class);
@@ -56,4 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+// ------------------------
+// Auth routes
+// ------------------------
 require __DIR__.'/auth.php';

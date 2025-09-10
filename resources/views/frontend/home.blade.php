@@ -13,81 +13,66 @@
 
 {{-- SECTION CONTENU PRINCIPAL --}}
 @section('content')
-    {{-- Section "Nos Produits Phares" avec vraies données --}}
+    {{-- Section "Nos Produits" - Affichage des catégories --}}
     <section class="products-section py-5">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold">NOS PRODUITS PHARES</h2>
-                <p class="lead text-muted">Découvrez notre sélection de produits en fibrociment ECOMAT</p>
-            </div>
+            <h2 class="text-center mb-4">NOS PRODUITS</h2>
 
-            <div class="row">
-                @php
-                    $featuredProducts = $products->take(3);
-                @endphp
+            <div class="row text-center">
+                @foreach ($categories as $category)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-img-wrapper">
+                                @if($category->image)
+                                    <img src="{{ Storage::url($category->image) }}"
+                                         alt="{{ $category->name }}"
+                                         class="card-img-top"
+                                         style="height: 300px; object-fit: cover;">
+                                @else
+                                    {{-- Images par défaut selon la catégorie --}}
+                                    @if(Str::contains(strtolower($category->name), ['plaque', 'ondulé']))
+                                        <img src="{{ asset('assets/images/produit1.jpg') }}"
+                                             alt="{{ $category->name }}"
+                                             class="card-img-top"
+                                             style="height: 300px; object-fit: cover;">
+                                    @elseif(Str::contains(strtolower($category->name), ['finition', 'accessoire']))
+                                        <img src="{{ asset('assets/images/produit2.jpg') }}"
+                                             alt="{{ $category->name }}"
+                                             class="card-img-top"
+                                             style="height: 300px; object-fit: cover;">
+                                    @else
+                                        <img src="{{ asset('assets/images/produit3.jpg') }}"
+                                             alt="{{ $category->name }}"
+                                             class="card-img-top"
+                                             style="height: 300px; object-fit: cover;">
+                                    @endif
+                                @endif
+                            </div>
 
-                @foreach ($featuredProducts as $product)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100 shadow-lg border-0 product-card-hover">
-                            @if ($product->images->count())
-                                <div class="card-img-wrapper position-relative">
-                                    <img src="{{ Storage::url($product->images->first()->image_path) }}"
-                                        alt="{{ $product->name }}" class="card-img-top" style="height: 250px; object-fit: cover;">
-                                    <div class="position-absolute top-0 end-0 m-2">
-                                        <span class="badge bg-primary">{{ $product->category->name }}</span>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="card-img-wrapper position-relative">
-                                    <div class="d-flex align-items-center justify-content-center bg-light" style="height: 250px;">
-                                        <div class="text-center">
-                                            <i class="fas fa-image fa-3x text-muted mb-2"></i>
-                                            <p class="text-muted mb-0 small">{{ $product->name }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="position-absolute top-0 end-0 m-2">
-                                        <span class="badge bg-primary">{{ $product->category->name }}</span>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold">{{ $product->name }}</h5>
-                                <p class="card-text text-muted flex-grow-1">
-                                    {{ Str::limit($product->description, 100) }}
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">{{ $category->name }}</h5>
+                                @if($category->description)
+                                    <p class="card-text text-muted">{{ Str::limit($category->description, 80) }}</p>
+                                @endif
+                                <p class="text-muted small">
+                                    {{ $category->products->count() }} produit(s) disponible(s)
                                 </p>
-                                <div class="mt-auto">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="h5 text-primary mb-0 fw-bold">
-                                            {{ number_format($product->price, 0, ',', ' ') }} FCFA
-                                        </span>
-                                        <small class="text-muted">l'unité</small>
-                                    </div>
-                                    <div class="d-grid gap-2">
-                                        <a href="{{ route('products.show', $product->slug) }}"
-                                           class="btn btn-primary">
-                                            <i class="fas fa-eye me-2"></i>Voir détails
-                                        </a>
-                                        <a href="{{ route('contact.devis') }}"
-                                           class="btn btn-outline-primary btn-sm">
-                                            <i class="fas fa-calculator me-2"></i>Demander un devis
-                                        </a>
-                                    </div>
-                                </div>
+                                <a href="{{ route('categories.show', $category->slug) }}"
+                                   class="btn btn-primary">
+                                    <i class="fas fa-eye me-2"></i>Voir
+                                </a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <div class="text-center mt-5">
-                <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-th-large me-2"></i>
+            <div class="text-center mt-4">
+                <a href="{{ route('products.index') }}" class="btn btn-custom-outline">
                     Voir tous nos produits
                 </a>
             </div>
         </div>
-
     </section>
 
     {{-- Section "Produits dynamiques" --}}

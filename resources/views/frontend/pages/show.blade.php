@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('hero')
-    <header class="hero-section" style="background-image: url('{{ asset('assets/images/page-hero.jpg') }}');">
+    <header class="hero-section" style="background-image: url('{{ asset('assets/images/hero-background.jpg') }}');">
         <div class="container text-center">
             <div class="hero-text-box">
                 <h1 class="display-4 fw-bold">{{ strtoupper($page->title) }}</h1>

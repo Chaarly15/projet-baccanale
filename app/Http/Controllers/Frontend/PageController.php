@@ -13,4 +13,10 @@ class PageController extends Controller
         $page = Page::where('slug', $slug)->firstOrFail();
         return view('frontend.pages.show', compact('page'));
     }
+
+    //Delete Function
+    public function delete($slug){
+        $page = Page::where('slug', $slug)->firstOrFail();
+        return view('frontend.pages.show', compact('page'));
+    }
 }

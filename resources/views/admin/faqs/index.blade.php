@@ -4,9 +4,12 @@
 @section('content')
 <div class="container">
     <h2>FAQ</h2>
-    <a href="{{ route('admin.faqs.create') }}" class="btn btn-success mb-3">Ajouter une question</a>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('admin.faqs.create') }}" class="btn btn-success">Ajouter une question</a>
+    </div>
 
-    <table class="table table-bordered">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Question</th>
@@ -29,7 +32,8 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+        </table>
+    </div>
 
     {{ $faqs->links() }}
 </div>

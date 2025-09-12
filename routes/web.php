@@ -54,13 +54,18 @@ Route::get('/fibrociment', fn() => view('frontend.pages.fibrociment'))->name('pa
 // Page dynamique (toujours en dernier)
 Route::get('/{slug}', [FrontendPageController::class, 'show'])->name('pages.show');
 
+//-------------------------
+// Login
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/login', Login::class)->name('login');
+});
+
 
 // ------------------------
 // Admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    //dd('On rentre');
-    Route::get('/login', Login::class)->name('login');
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('pages', AdminPageController::class);

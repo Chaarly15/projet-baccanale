@@ -28,10 +28,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="price">Prix</label>
-            <input type="number" name="price" class="form-control">
-        </div>
+
 
         <div class="mb-3">
             <label for="description">Description</label>

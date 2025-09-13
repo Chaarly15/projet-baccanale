@@ -305,7 +305,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Mon profil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">

@@ -9,6 +9,7 @@ use App\Models\Document;
 use App\Models\Faq;
 use App\Models\Page;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
@@ -34,5 +35,11 @@ class DashboardController extends Controller
         ];
 
         return view('admin.dashboard', compact('stats', 'recent'));
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('admin.profile', compact('user'));
     }
 }

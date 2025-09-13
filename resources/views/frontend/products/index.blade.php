@@ -73,9 +73,8 @@
                                 <p class="card-text text-muted flex-grow-1">
                                     {{ Str::limit($product->description, 120) }}
                                 </p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <span class="h5 text-primary mb-0">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
-                                    <a href="{{ route('products.show', $product->slug) }}" 
+                                <div class="d-flex justify-content-end align-items-center mt-auto">
+                                    <a href="{{ route('products.show', $product->slug) }}"
                                        class="btn btn-primary btn-sm">
                                         <i class="fas fa-eye me-1"></i>
                                         Voir détails

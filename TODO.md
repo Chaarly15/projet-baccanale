@@ -1,0 +1,4 @@
+- [x] Fix validation rule in app/Livewire/Settings/Profile.php: remove invalid 'lowercase' rule from email validation
+- [x] Fix event dispatch in app/Livewire/Settings/Profile.php: change $this->dispatch('profile-updated', name: $user->name) to $this->dispatch('profile-updated', ['name' => $user->name])
+- [x] Fix redirect method in app/Livewire/Settings/Profile.php: change $this->redirectIntended to $this->redirect(route('dashboard', absolute: false))
+- [x] Verify and fix any issues in resources/views/livewire/settings/profile.blade.php related to flux components if necessary

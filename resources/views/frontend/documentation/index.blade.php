@@ -166,6 +166,7 @@
 
     <section class="py-5">
         <div class="container">
+            <p>Debug: {{ $documents->count() }} documents grouped</p>
             @if($documents->isEmpty())
                 <div class="text-center py-5">
                     <div class="document-icon mx-auto mb-4">

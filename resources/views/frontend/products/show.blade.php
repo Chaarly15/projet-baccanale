@@ -80,10 +80,6 @@
                             </div>
                             
                             <h1 class="h2 mb-3">{{ $product->name }}</h1>
-                            
-                            <div class="mb-4">
-                                <span class="h3 text-primary fw-bold">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
-                            </div>
 
                             <div class="mb-4">
                                 <h5 class="mb-3">Description</h5>
@@ -156,9 +152,8 @@
                                     <p class="card-text text-muted flex-grow-1">
                                         {{ Str::limit($similarProduct->description, 100) }}
                                     </p>
-                                    <div class="d-flex justify-content-between align-items-center mt-auto">
-                                        <span class="h6 text-primary mb-0">{{ number_format($similarProduct->price, 0, ',', ' ') }} FCFA</span>
-                                        <a href="{{ route('products.show', $similarProduct->slug) }}" 
+                                    <div class="d-flex justify-content-end align-items-center mt-auto">
+                                        <a href="{{ route('products.show', $similarProduct->slug) }}"
                                            class="btn btn-primary btn-sm">
                                             Voir détails
                                         </a>

@@ -17,6 +17,7 @@
     </div>
 </div>
 
+<!-- === MÉTRIQUES PRINCIPALES === -->
 <!-- Statistiques principales -->
 <div class="row mb-4">
     <div class="col-lg-3 col-md-6 mb-3">
@@ -98,6 +99,7 @@
     </div>
 </div>
 
+<!-- === ACTIONS RAPIDES === -->
 <!-- Actions rapides -->
 <div class="row mb-4">
     <div class="col-12">
@@ -149,6 +151,7 @@
     </div>
 </div>
 
+<!-- === ACTIVITÉ RÉCENTE === -->
 <!-- Activité récente -->
 <div class="row">
     <div class="col-lg-8 mb-4">
@@ -248,6 +251,7 @@
     </div>
 </div>
 
+<!-- === INFORMATIONS SUPPLÉMENTAIRES === -->
 <!-- Statistiques supplémentaires -->
 <div class="row">
     <div class="col-lg-6 mb-4">

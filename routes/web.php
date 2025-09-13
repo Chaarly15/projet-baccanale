@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\DashboardController;
 
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Frontend\PageController as FrontendPageController;
 use App\Http\Controllers\Frontend\FaqController as FrontFaqController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\DocumentationController;
-
+use App\Livewire\Auth\Login;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -53,30 +54,30 @@ Route::get('/fibrociment', fn() => view('frontend.pages.fibrociment'))->name('pa
 // Page dynamique (toujours en dernier)
 Route::get('/{slug}', [FrontendPageController::class, 'show'])->name('pages.show');
 
+//-------------------------
+// Login
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/login', Login::class)->name('login');
+});
+
 
 // ------------------------
 // Admin
-// ------------------------
-Route::prefix('admin')
-    ->name('admin.')
-    ->middleware(['auth', 'verified', 'admin'])
-    ->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::resource('products', AdminProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('pages', AdminPageController::class);
+    Route::resource('faqs', AdminFaqController::class);
+    Route::resource('documents', AdminDocumentController::class);
+    Route::resource('contacts', AdminContactController::class);
+});
 
-        // Dashboard
-        Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-        // CRUD Admin
-        Route::resource('products', AdminProductController::class);
-        Route::resource('categories', CategoryController::class);
-        Route::resource('pages', AdminPageController::class);
-        Route::resource('faqs', AdminFaqController::class);
-        Route::resource('documents', AdminDocumentController::class);
-        Route::get('contacts', [AdminContactController::class, 'index'])->name('contacts.index');
-    });
-
-// ------------------------
-// Settings utilisateur
-// ------------------------
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 

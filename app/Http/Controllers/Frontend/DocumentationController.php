@@ -11,8 +11,7 @@ class DocumentationController extends Controller
 {
     public function index()
     {
-        $documents = Document::active()
-            ->ordered()
+        $documents = Document::ordered()
             ->get()
             ->groupBy('type');
 
